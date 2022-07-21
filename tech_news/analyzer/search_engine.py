@@ -40,6 +40,21 @@ def search_by_date(date):
 # Requisito 8
 def search_by_tag(tag):
     """Seu código deve vir aqui"""
+    raw_data_list = search_news(query={
+        "tags": {
+            "$elemMatch": {
+                "$regex": f"{tag}", "$options": "i"}
+            }}
+    )
+
+    formatted_data = []
+
+    for data in raw_data_list:
+        formatted_data.append((
+            data["title"], data["url"]),
+        )
+
+    return formatted_data
 
 
 # Requisito 9
