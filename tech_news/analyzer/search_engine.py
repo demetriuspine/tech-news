@@ -43,7 +43,8 @@ def search_by_tag(tag):
     raw_data_list = search_news(query={
         "tags": {
             "$elemMatch": {
-                "$regex": f"{tag}", "$options": "i"}
+                "$regex": tag,
+                "$options": "i"}
             }}
     )
 
@@ -60,3 +61,16 @@ def search_by_tag(tag):
 # Requisito 9
 def search_by_category(category):
     """Seu código deve vir aqui"""
+    raw_data_list = search_news(query={
+        "category": {
+            "$regex": category,
+            "$options": "i"
+        }
+    }
+    )
+    response = []
+    for data in raw_data_list:
+        response.append(
+            (data["title"], data["url"]),
+        )
+    return response
